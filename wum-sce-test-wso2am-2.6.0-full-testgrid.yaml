@@ -10,11 +10,11 @@ infrastructureConfig:
     - JDK : ORACLE_JDK8
   includes:
      - Ubuntu-18.04
-     - MySQL-5.7
      - OracleJDK-8
      - SQLServer-SE-13.00
      - Oracle-SE2-12.1.0.2.v12
      - Postgres-10.3
+     - MySQL-5.7
   provisioners:
     - name: single-node-deployment
       remoteRepository: "git@github.com:wso2-support/aws-apim.git"
