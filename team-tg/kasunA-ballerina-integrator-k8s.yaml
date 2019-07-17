@@ -1,0 +1,58 @@
+# A testGrid Job 
+version: '0.9'
+emailToList: "kasuna@wso2.com"
+infrastructureConfig:
+  iacProvider: KUBERNETES
+  infrastructureProvider: GKE
+  containerOrchestrationEngine: None
+  includes:
+    - CentOS-7.5
+    - MySQL-5.7
+    - OPEN_JDK8
+  provisioners:
+    - name: kubernetes working environment
+      description: Provision Infra for running intg tests
+      remoteRepository: "https://github.com/KasunAratthanage/wso2_testgrid_kubernetes/tree/branch1"
+      scripts:
+        - name: 'Test-Phase-1-Deployment'
+          description: ''
+          type: KUBERNETES
+          phase: CREATE
+        - name: 'kubernetes-destroy-environment'
+          type: KUBERNETES
+          phase: DESTROY
+# deployment-inputs.properties (infrastructure.properties) <- contain the deployment inputParameters and infrastructure provisioner outputs.
+# for ex. this contain the kubernetes 'namespace', 'yamls', 'deployments' properties
+# namespace=deployment-abcrandom, yamls=target/kubernetes/api_test/api_test.yaml, deployments=wso2apim-with-analytics-apim     
+deploymentConfig:
+  deploymentPatterns:
+    - name: 'deployment'
+      remoteRepository: "https://github.com/KasunAratthanage/wso2_testgrid_kubernetes/tree/branch1"
+      description: 'deployment of the resources in the gke'
+      scripts:
+        - name: 'deploy1'
+          type: SHELL
+          file: deploymentRepository/ballerina_intgrator_deployement.sh
+        - name: 'deploy'
+          type: KUBERNETES
+          inputParameters:
+            yamls: 'target/kubernetes/api_test/api_test.yaml'
+            deployments: 'api_test'
+        - name: 'create-deployment.ballerina_integrator_outputs.sh'
+          type: SHELL
+          file: deploymentRepository/ballerina_integrator_outputs.sh  # generate ballerina endpoint and write deployment.properties
+
+# outputs a deployment.properties (ie. a scenario-test-inputs.properties)
+# This contains the deployment details that you output from the SHELL deployment-outputs.sh file.
+# for ex. this can contain BallerinaServiceEndpoint=http://10.100.1.100:9090/amazons3
+
+scenarioConfigs:
+  - testType: TESTNG
+    remoteRepository: "https://github.com/KasunAratthanage/wso2_testgrid_kubernetes/tree/branch1"
+    name: "ref-scenario"
+    description: "Test-Phase-1"
+    file: scenarioTestsRepository/ref-scenario/tests/test.sh
+
+
+    # test.sh --input-dir /path/to/data-bucket --output-dir /path/sdsds
+    # read the deployment.properties from --input-dir $2/deployment.properties 
