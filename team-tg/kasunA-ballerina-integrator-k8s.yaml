@@ -12,7 +12,8 @@ infrastructureConfig:
   provisioners:
     - name: kubernetes working environment
       description: Provision Infra for running intg tests
-      remoteRepository: "https://github.com/KasunAratthanage/wso2_testgrid_kubernetes/tree/branch1"
+      remoteRepository: "https://github.com/KasunAratthanage/wso2_testgrid_kubernetes.git"
+      remoteBranch: "branch1"
       scripts:
         - name: 'Test-Phase-1-Deployment'
           description: ''
@@ -27,7 +28,8 @@ infrastructureConfig:
 deploymentConfig:
   deploymentPatterns:
     - name: 'deployment'
-      remoteRepository: "https://github.com/KasunAratthanage/wso2_testgrid_kubernetes/tree/branch1"
+      remoteRepository: "https://github.com/KasunAratthanage/wso2_testgrid_kubernetes.git"
+      remoteBranch: "branch1"
       description: 'deployment of the resources in the gke'
       scripts:
         - name: 'deploy1'
@@ -48,7 +50,8 @@ deploymentConfig:
 
 scenarioConfigs:
   - testType: TESTNG
-    remoteRepository: "https://github.com/KasunAratthanage/wso2_testgrid_kubernetes/tree/branch1"
+    remoteRepository: "https://github.com/KasunAratthanage/wso2_testgrid_kubernetes.git"
+    remoteBranch: "branch1"
     name: "ref-scenario"
     description: "Test-Phase-1"
     file: scenarioTestsRepository/ref-scenario/tests/test.sh
