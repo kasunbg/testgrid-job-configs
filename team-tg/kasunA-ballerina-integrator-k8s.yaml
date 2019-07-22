@@ -38,6 +38,7 @@ deploymentConfig:
           inputParameters:
             BallerinaVersion: "0.991.0"
             isDebugEnabled: "true"
+            TestGroup: "api_test"
         - name: 'deploy'
           type: KUBERNETES
           inputParameters:
