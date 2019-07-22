@@ -35,6 +35,9 @@ deploymentConfig:
         - name: 'deploy1'
           type: SHELL
           file: deploymentRepository/ballerina_intgrator_deployement.sh
+          inputParameters:
+            BallerinaVersion: "0.991.0"
+            isDebugEnabled: "true"
         - name: 'deploy'
           type: KUBERNETES
           inputParameters:
