@@ -43,7 +43,7 @@ deploymentConfig:
           type: KUBERNETES
           inputParameters:
             deploymentYamlFiles: 'module-amazons3/target/kubernetes/api_test/api_test.yaml'
-            exposedDeployments: 'api_test'
+            exposedDeployments: 'api-test-deployment'
         - name: 'create-deployment.ballerina_integrator_outputs.sh'
           type: SHELL
           file: deploymentRepository/ballerina_integrator_outputs.sh  # generate ballerina endpoint and write deployment.properties
