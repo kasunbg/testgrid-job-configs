@@ -54,11 +54,11 @@ deploymentConfig:
 
 scenarioConfigs:
   - testType: TESTNG
-    remoteRepository: "https://github.com/KasunAratthanage/wso2_testgrid_kubernetes.git"
-    remoteBranch: "branch1"
-    name: "ref-scenario"
+    remoteRepository: "https://github.com/KasunAratthanage/ballerina-integrator"
+    remoteBranch: "test_s3connector"
+    name: "examples"
     description: "Test-Phase-1"
-    file: scenarioTestsRepository/ref-scenario/tests/test.sh
+    file: examples/test/tesh.sh
 
 
     # test.sh --input-dir /path/to/data-bucket --output-dir /path/sdsds
